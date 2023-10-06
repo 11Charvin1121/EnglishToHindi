@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF TRANSLATER</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Orbitron&family=Pacifico&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* background-color: rebeccapurple; */
+        font-family: "Croissant One", cursive;
+        font-family: "Orbitron", sans-serif;
+        font-family: "Pacifico", cursive;
+        font-family: "Poppins", sans-serif;
+        background: hsla(0, 0%, 0%, 1);
+        background: linear-gradient(
+          300deg,
+          hsla(0, 0%, 0%, 1) 14%,
+          hsla(234, 74%, 18%, 1) 73%,
+          hsla(255, 38%, 44%, 1) 98%
+        );
+        background: -moz-linear-gradient(
+          300deg,
+          hsla(0, 0%, 0%, 1) 14%,
+          hsla(234, 74%, 18%, 1) 73%,
+          hsla(255, 38%, 44%, 1) 98%
+        );
+        background: -webkit-linear-gradient(
+          300deg,
+          hsla(0, 0%, 0%, 1) 14%,
+          hsla(234, 74%, 18%, 1) 73%,
+          hsla(255, 38%, 44%, 1) 98%
+        );
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#0c134f", GradientType=1 );
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* background-color: #A2678A; */
+        /* background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%); */
+      }
+      header {
+        background-color: black;
+        color: white;
+        /* background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
+      }
+      main {
+        margin-top: 10px;
+      }
+      .buttonset {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      h1 {
+        text-align: center;
+        color: black;
+      }
+      .textcontainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 5px;
+      }
+      .heading {
+        display: flex;
+        margin-top: 30px;
+      }
+      #result {
+        /* margin-left: 555px; */
+        font-weight: 600;
+        font-size: 20px;
+      }
+      #test {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      textarea,
+      p {
+        width: 350px;
+        height: 275px;
+        border: 4px solid black;
+        border-radius: 10px;
+        /* background-color: violet; */
+      }
+      /* button {
+        height: 30px;
+        width: 200px;
+		
+      } */
+      #pdfFile {
+        display: none;
+      }
+      .heading1 {
+        margin-left: 280px;
+        color: #ccc;
+      }
+      .heading2 {
+        margin-left: 540px;
+        color: #ccc;
+      }
+
+      /*translate button css*/
+
+      .translate-button {
+        margin-top: 30px;
+        height: 30px;
+        width: 200px;
+        align-items: center;
+        background-color: #ccc;
+        border-radius: 10px;
+        box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
+        box-sizing: border-box;
+        color: #121212;
+        cursor: pointer;
+        display: inline-flex;
+        border-color: #121212;
+        font-family: "Poppins", sans-serif;
+        justify-content: center;
+        line-height: 1;
+        /* margin: 0; */
+        /* outline: none; */
+        padding: 1rem 1.2rem;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
+        border: 0;
+        user-select: none;
+        font-size: 16px;
+      }
+
+      .translate-button:hover {
+        box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+      }
+      /* #input_pdf {
+        margin-left: 245px;
+      }
+      #pdf {
+        margin-left: 15px;
+      }
+      #speak {
+        margin-left: 100px;
+      }
+      #translate {
+        margin-left: 25px;
+      } */
+    </style>
+    <!-- AJAX REQUESTS -->
+
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 style="color: #ccc">Language Translater Tool</h1>
+    </header>
+    <main>
+      <div class="container">
+        <h1 style="color: #ccc">English To Hindi</h1>
+        <div class="heading">
+          <h4 class="heading1">Translation</h4>
+          <h4 class="heading2">Translated Text</h4>
+        </div>
+
+        <div class="textcontainer">
+          <textarea id="test" placeholder="Enter Text Here..."></textarea>
+
+          <textarea
+            name=""
+            id="result"
+            cols="30"
+            rows="10"
+            readonly
+            placeholder="Translated Text..."
+          ></textarea>
+          <!-- <p id="result"></p> -->
+        </div>
+        <div class="buttonset">
+          <div class="translate-button" id="input_pdf">
+            <input type="file" id="pdfFile" />
+            <label id="pdfFile-input" for="pdfFile"> Choose File </label>
+          </div>
+          <button
+            onclick="translateInputFile()"
+            class="translate-button"
+            id="pdf"
+          >
+            Translate PDF File
+          </button>
+          <button
+            onclick="translateTextAreaFile()"
+            class="translate-button"
+            id="translate"
+          >
+            Translate
+          </button>
+
+          <button onclick="speakFile()" class="translate-button" id="speak">
+            Speak
+          </button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<script>
+  window.onload = () => {
+    console.clear();
+  };
+
+  function speakFile() {
+    var text = document.querySelector("#test").value;
+    console.log(text);
+    $.ajax({
+      url: "/speak",
+      type: "GET",
+      async: true,
+      data: { userText: text, data: "text" },
+      success: function (data) {
+        document.querySelector("#result").innerHTML = data.translatedText;
+      },
+    });
+  }
+  function translateInputFile() {
+    var file = document.getElementById("pdfFile").files[0];
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      var pdfData = e.target.result;
+      const uint8Array = new Uint8Array(pdfData);
+      sendToServer(uint8Array);
+    };
+
+    // Read the PDF file as an ArrayBuffer
+    reader.readAsArrayBuffer(file);
+  }
+
+  function sendToServer(uint8Array) {
+    $.ajax({
+      type: "POST",
+      url: "/TranslatePDF",
+      processData: false,
+      contentType: "application/octet-stream",
+      data: uint8Array.buffer,
+      success: function (response) {
+        console.log(response);
+        document.getElementById("test").innerText = response.translatedText;
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
+  }
+
+  function translateTextAreaFile() {
+    var text = document.querySelector("#test").value;
+    console.log(text);
+    $.ajax({
+      url: "/TranslateText",
+      type: "GET",
+      async: true,
+      data: { userText: text, data: "text" },
+      success: function (data) {
+        document.querySelector("#result").innerHTML = data.translatedText;
+      },
+    });
+  }
+</script>
