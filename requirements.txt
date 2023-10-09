@@ -6,4 +6,4 @@ Gunicorn
 PyPDF2
 Translator
 googletrans
-
+PyMuPDF
