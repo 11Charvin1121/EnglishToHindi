@@ -3,3 +3,4 @@ pyttsx3
 fitz
 translate
 Gunicorn
+PyPDF2
