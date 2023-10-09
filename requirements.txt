@@ -4,3 +4,4 @@ fitz
 translate
 Gunicorn
 PyPDF2
+Translator
