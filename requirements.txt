@@ -6,3 +6,4 @@ Gunicorn
 PyPDF2
 Translator
 googletrans
+frontend
