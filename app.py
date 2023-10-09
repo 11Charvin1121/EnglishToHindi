@@ -67,6 +67,3 @@ def speak():
         return jsonify({"translatedText" : result})
     except Exception as e:
         return str(e), 500 
-
-if __name__ == "__main__":
-    app.run(debug=True,False='0.0.0.0')
